@@ -1,0 +1,3 @@
+[submodule "src/commonTest/resources/qifs"]
+	path = src/commonTest/resources/qifs
+	url = git@github.com:qpackers/qifs.git
