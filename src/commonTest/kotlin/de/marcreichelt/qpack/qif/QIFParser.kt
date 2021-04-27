@@ -1,17 +1,15 @@
 package de.marcreichelt.qpack.qif
 
-data class HeaderLine(val key: String, val value: String) {
-    override fun toString(): String = "$key $value"
-}
+import de.marcreichelt.qpack.Header
 
 /**
  * Parses QIF files (QPACK interop format), which are useful to test QPACK implementations.
  *
  * See [QPACK-Offline-Interop](https://github.com/quicwg/base-drafts/wiki/QPACK-Offline-Interop).
  */
-fun parseQIF(qif: String): List<List<HeaderLine>> {
-    val headerSets = mutableListOf<List<HeaderLine>>()
-    var currentHeaderSet = mutableListOf<HeaderLine>()
+fun parseQIF(qif: String): List<List<Header>> {
+    val headerSets = mutableListOf<List<Header>>()
+    var currentHeaderSet = mutableListOf<Header>()
 
     qif.lineSequence()
         .filterNot { it.startsWith("#") }
@@ -23,7 +21,7 @@ fun parseQIF(qif: String): List<List<HeaderLine>> {
                 }
             } else {
                 val (key, value) = line.split(Regex(" +"), 2)
-                currentHeaderSet.add(HeaderLine(key, value))
+                currentHeaderSet.add(Header(key, value))
             }
         }
 

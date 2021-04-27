@@ -1,5 +1,6 @@
 package de.marcreichelt.qpack.qif
 
+import de.marcreichelt.qpack.Header
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -67,18 +68,18 @@ class QIFParserTest {
         assertEquals(
             headerSets, listOf(
                 listOf(
-                    HeaderLine(":method", "GET"),
-                    HeaderLine(":scheme", "http"),
-                    HeaderLine(":authority", "www.netbsd.org"),
-                    HeaderLine(":path", "/"),
-                    HeaderLine("connection", "keep-alive"),
+                    Header(":method", "GET"),
+                    Header(":scheme", "http"),
+                    Header(":authority", "www.netbsd.org"),
+                    Header(":path", "/"),
+                    Header("connection", "keep-alive"),
                 ),
                 listOf(
-                    HeaderLine(":method", "GET"),
-                    HeaderLine(":scheme", "http"),
-                    HeaderLine(":authority", "www.netbsd.org"),
-                    HeaderLine(":path", "/global.css"),
-                    HeaderLine(
+                    Header(":method", "GET"),
+                    Header(":scheme", "http"),
+                    Header(":authority", "www.netbsd.org"),
+                    Header(":path", "/global.css"),
+                    Header(
                         "user-agent",
                         "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0"
                     ),
