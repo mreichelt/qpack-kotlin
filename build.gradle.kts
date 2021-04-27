@@ -21,6 +21,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
+                implementation("com.squareup.okio:okio-multiplatform:2.10.0")
             }
         }
         val commonTest by getting {
