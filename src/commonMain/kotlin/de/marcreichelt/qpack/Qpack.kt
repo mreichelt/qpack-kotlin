@@ -1,10 +1,19 @@
 package de.marcreichelt.qpack
 
+import de.marcreichelt.qpack.AcknowledgementMode.None
 import de.marcreichelt.qpack.Header.Companion.RESPONSE_STATUS
 import de.marcreichelt.qpack.Header.Companion.TARGET_AUTHORITY
 import de.marcreichelt.qpack.Header.Companion.TARGET_METHOD
 import de.marcreichelt.qpack.Header.Companion.TARGET_PATH
 import de.marcreichelt.qpack.Header.Companion.TARGET_SCHEME
+import okio.ByteString
+import okio.ByteString.Companion.decodeHex
+
+inline class QuicStreamId(val value: Int) {
+    init {
+        require(value >= 1)
+    }
+}
 
 object Qpack {
 
@@ -113,4 +122,21 @@ object Qpack {
         Header("x-frame-options", "sameorigin"),
     )
 
+    class Writer(
+        val maxDynamicTableCapacity: Int = 0,
+        val maxBlockedStreams: Int = 0,
+        val acknowledgementMode: AcknowledgementMode = None,
+    ) {
+
+        fun encode(streamId: QuicStreamId, headers: List<Header>): ByteString {
+            return "0000".decodeHex()
+        }
+
+    }
+
+}
+
+enum class AcknowledgementMode {
+    None,
+    Immediate,
 }
