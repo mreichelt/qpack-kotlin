@@ -11,6 +11,7 @@ fun parseQIF(qif: String): List<List<Header>> {
     val headerSets = mutableListOf<List<Header>>()
     var currentHeaderSet = mutableListOf<Header>()
 
+    val anyWhitespace = Regex("\\s+")
     qif.lineSequence()
         .filterNot { it.startsWith("#") }
         .forEach { line ->
@@ -20,7 +21,7 @@ fun parseQIF(qif: String): List<List<Header>> {
                     currentHeaderSet = mutableListOf() // start next header set
                 }
             } else {
-                val (key, value) = line.split(Regex(" +"), 2)
+                val (key, value) = line.split(anyWhitespace, 2)
                 currentHeaderSet.add(Header(key, value))
             }
         }
